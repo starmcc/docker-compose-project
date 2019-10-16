@@ -1,0 +1,13 @@
+version: '3'
+services:
+  project:
+    container_name: 'project'
+    restart: always
+    image: ascdc/jdk8
+    ports:
+      - 6543:6543
+    environment:
+      LANG: C.UTF-8
+    volumes:
+      - ./project.jar:/usr/local/jar/project.jar
+    entrypoint: nohup java -jar /usr/local/jar/project.jar --spring.profiles.active=prod &
