@@ -1,0 +1,23 @@
+version: '3'
+services: 
+  mindoc_new:
+    image: registry.cn-hangzhou.aliyuncs.com/mindoc/mindoc:v2.0
+    container_name: 'mindoc'
+    privileged: false
+    restart: always
+    ports:
+      - 8181:8181
+    volumes:
+      - ./database:/mindoc/database
+      - ./uploads:/mindoc/uploads
+    environment:
+      - MINDOC_RUN_MODE=prod
+      - MINDOC_DB_ADAPTER=sqlite3
+      - MINDOC_DB_DATABASE=./database/mindoc.db
+      - MINDOC_CACHE=true
+      - MINDOC_CACHE_PROVIDER=file
+      - MINDOC_ENABLE_EXPORT=false
+      - MINDOC_BASE_URL=www.starmcc.com
+    dns:
+      - 223.5.5.5
+      - 223.6.6.6
